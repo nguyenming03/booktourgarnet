@@ -1,0 +1,174 @@
+.booking-section {
+    background-color: #f0f8ff; /* Màu xanh dương nhạt */
+    padding: 50px 0;
+    position: relative;
+    background-image: url('https://cdn.vjshop.vn/tin-tuc/cach-chup-anh-phong-canh/cach-chup-anh-phong-canh-dep-15.jpg'); /* Đặt ảnh nền nếu muốn */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.booking-form-wrapper {
+    background-color: rgba(255, 255, 255, 0.8); /* Nền trắng bán trong suốt */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.booking-form .form-group {
+    margin-bottom: 15px;
+}
+
+.booking-form label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.booking-form input, .booking-form select {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+.booking-form .btn-submit {
+    background-color: #008cba; /* Màu xanh dương đậm */
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.booking-form .btn-submit:hover {
+    background-color: #005f7f; /* Màu xanh dương đậm khi hover */
+}
+
+.selected-tour-info {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.selected-tour-info h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.selected-tour-info p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.selected-tour-info .btn-confirm {
+    background-color: #4CAF50; /* Màu xanh lá cây */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.selected-tour-info .btn-confirm:hover {
+    background-color: #45a049;
+}
+
+@media (max-width: 768px) {
+    .booking-section {
+        padding: 30px 0;
+    }
+    .booking-form-wrapper {
+        padding: 20px;
+    }
+    .col-md-6 {
+        width: 100%; /* Cột chiếm toàn bộ chiều rộng trên màn hình nhỏ */
+        margin-bottom: 20px;
+    }
+}
+/* Tổng thể thông tin vé */
+.selected-tour-info {
+    background-color: rgba(255, 255, 255, 0.9); /* Nền trắng bán trong suốt */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Bố trí ngang */
+.tour-horizontal-layout {
+    display: flex; /* Hiển thị ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    gap: 20px; /* Khoảng cách giữa ảnh và chi tiết */
+}
+
+/* Ảnh tour */
+.tour-image img {
+    max-width: 120px; /* Kích thước cố định */
+    height: auto;
+    border-radius: 8px; /* Bo góc ảnh */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Đổ bóng cho ảnh */
+}
+
+/* Thông tin tour */
+.tour-details {
+    flex: 1; /* Chiếm hết phần còn lại */
+}
+
+/* Vùng ngày khởi hành và số lượng */
+.highlight-info {
+    background-color: #d4edfc; /* Màu xanh da trời nhạt */
+    padding: 10px;
+    border-radius: 5px;
+    
+    margin-top: 10px;
+}
+
+/* Chỉnh sửa chữ và bỏ viền */
+.highlight-info p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #005f7f; /* Màu chữ xanh đậm */
+    border: none;
+    outline: none;
+}
+.payment-options .form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.payment-options input[type="radio"] {
+    accent-color: #008cba; /* Màu xanh dương nhạt */
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+
+.payment-options label {
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+}
+
+
+
+

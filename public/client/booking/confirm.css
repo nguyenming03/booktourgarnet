@@ -1,0 +1,192 @@
+.payment-section {
+    background-color: #f0f8ff; /* Màu xanh dương nhạt */
+    padding: 50px 0;
+    position: relative;
+    background-image: url('https://cdn.vjshop.vn/tin-tuc/cach-chup-anh-phong-canh/cach-chup-anh-phong-canh-dep-15.jpg'); /* Đặt ảnh nền nếu muốn */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.payment-method-wrapper {
+    background-color: rgba(255, 255, 255, 0.8); /* Nền trắng bán trong suốt */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.payment-form .form-group {
+    margin-bottom: 15px;
+}
+
+.payment-form label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.payment-form select {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+.payment-form .btn-submit {
+    background-color: #008cba; /* Màu xanh dương đậm */
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.payment-form .btn-submit:hover {
+    background-color: #005f7f; /* Màu xanh dương đậm khi hover */
+}
+
+.info-wrapper {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.personal-info p, .tour-info p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.personal-info p strong, .tour-info p strong {
+    color: #333;
+}
+
+.info-wrapper .btn-confirm {
+    background-color: #4CAF50; /* Màu xanh lá cây */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.info-wrapper .btn-confirm:hover {
+    background-color: #45a049;
+}
+
+@media (max-width: 768px) {
+    .payment-section {
+        padding: 30px 0;
+    }
+    .payment-method-wrapper {
+        padding: 20px;
+    }
+    .col-md-6 {
+        width: 100%; /* Cột chiếm toàn bộ chiều rộng trên màn hình nhỏ */
+        margin-bottom: 20px;
+    }
+}
+
+
+
+
+
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Khoảng cách giữa các phương thức thanh toán */
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Nền trắng bán trong suốt */
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.payment-option input[type="radio"] {
+    accent-color: #008cba; /* Màu radio */
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.payment-option label {
+    font-size: 16px;
+    color: #333;
+    flex: 1; /* Đẩy nhãn ra giữa */
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Khoảng cách giữa văn bản và hình ảnh */
+    cursor: pointer;
+}
+
+.payment-option label span {
+    flex: 1;
+}
+
+.payment-option .payment-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.divider {
+    height: 1px;
+    background-color: #ddd;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.payment-option input[type="radio"]:checked + label {
+    color: #008cba;
+    font-weight: bold;
+}
+
+.payment-option input[type="radio"]:checked + label .payment-img {
+    border: 2px solid #008cba;
+}
+
+
+.payment-form .btn-submit-payment {
+    background-color: #008cba; /* Màu xanh lá cây */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 20px; /* Khoảng cách từ các phương thức thanh toán */
+}
+
+.payment-form .btn-submit-payment:hover {
+    background-color: #218838; /* Màu xanh lá cây đậm khi hover */
+}
+
+
+
+
+
