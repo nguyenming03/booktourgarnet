@@ -123,7 +123,7 @@ class ArticleController extends Controller
             //Lấy id sản phẩm vừa thêm để thêm được album 
             //Xử lý thêm album
 
-            return redirect()->route('article.index')->with('success', 'Thêm mới thành công!');
+            // return redirect()->route('article.index')->with('success', 'Thêm mới thành công!');
             return redirect()->route('article.index')->with('success', 'Thêm mới thành công!');
         }
     }
