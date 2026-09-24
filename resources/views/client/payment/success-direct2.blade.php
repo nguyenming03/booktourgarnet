@@ -77,7 +77,7 @@
             <div class="tour-info">
                 <p><strong>Tour:</strong> <span>{{ $booking->tour_name }}</span></p>
                 <p><strong>Ngày khởi hành:</strong>
-                    <span>{{ $booking->start_date = \Carbon\Carbon::parse($booking->start_date)->format('d/m/Y') }}</span>
+                    <span>{{ $booking->start_date = \Carbon\Carbon::parse($booking->tour->start_date)->format('d/m/Y') }}</span>
                 </p>
                 <p><strong>Số lượng:</strong> <span>{{ $booking->number_old + $booking->number_children }}</span></p>
                 <p><strong>Giá vé:</strong> <span>{{ number_format($booking->total_money, 0, ',', '.') }} đ</span></p>

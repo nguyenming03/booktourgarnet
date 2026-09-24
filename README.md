@@ -46,7 +46,8 @@ Garnet Travel là một ứng dụng web được phát triển bằng Laravel, 
     php artisan queue:work
 8. **Truy cập ứng dụng tại**:
     [http://localhost:8000](http://localhost:8000)
-
+9. **Cài capcha**:
+    composer require anhskohbo/no-captcha
 ## 🛠️ Lệnh Artisan hữu ích
 
 - Tạo dữ liệu mẫu:
