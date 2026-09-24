@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admins\TourDate;
-use App\Models\Status;
+// use App\Models\Status;
 use App\Models\Admins\Tour;
 use App\Models\Admins\User;
 use Illuminate\Http\Request;
-use App\Models\LocationUpdate;
+// use App\Models\LocationUpdate;
 use App\Models\Admins\Location;
 use App\Models\Admins\ImageTour;
 use App\Http\Requests\TourRequest;
@@ -201,7 +201,7 @@ class TourController extends Controller
                     }
                 }
             } else {
-                \Log::warning('No category services or services found.');
+                Log::warning('No category services or services found.');
             }
 
 
@@ -398,7 +398,7 @@ class TourController extends Controller
                         }
                     }
                 } else {
-                    \Log::warning('No category services or services found.');
+                    Log::warning('No category services or services found.');
                 }
             }
 

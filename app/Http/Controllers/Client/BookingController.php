@@ -50,7 +50,7 @@ class BookingController extends Controller
             'g-recaptcha-response.captcha' => 'Captcha không hợp lệ.',
             'agree_policy.required' => 'Bạn cần đồng ý với chính sách để tiếp tục.',
         ];
-    
+
         // Xác thực dữ liệu
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -69,7 +69,38 @@ class BookingController extends Controller
             'g-recaptcha-response' => 'required|captcha',
             'agree_policy' => 'required',
         ], $messages);
-    
+
+        /*
+         * Bảo vệ ngày khởi hành ở backend.
+         * Ngày gửi từ input hidden có thể bị sửa ở trình duyệt,
+         * vì vậy luôn lấy ngày chính thức từ bảng tours.
+         */
+        $tour = Tour::findOrFail($validated['tour_id']);
+        $today = Carbon::today();
+        $tourStartDate = Carbon::parse($tour->start_date);
+        $tourEndDate = Carbon::parse($tour->end_date);
+
+        if ($tourStartDate->startOfDay()->lessThanOrEqualTo($today)) {
+            return redirect()->back()
+                ->withErrors([
+                    'start_date' => 'Ngày khởi hành phải sau ngày đặt. Tour này không còn ngày khởi hành hợp lệ.'
+                ])
+                ->withInput();
+        }
+
+        if ($tourEndDate->lt($tourStartDate)) {
+            return redirect()->back()
+                ->withErrors([
+                    'start_date' => 'Ngày kết thúc của tour không hợp lệ.'
+                ])
+                ->withInput();
+        }
+
+        // Luôn lưu ngày chính thức từ bảng tours.
+        $validated['start_date'] = $tourStartDate->toDateTimeString();
+        $validated['end_date'] = $tourEndDate->toDateTimeString();
+
+
         // Kiểm tra mã giảm giá
         $coupon = DB::table('coupons')
             ->where('code', $request->coupon)
@@ -78,11 +109,11 @@ class BookingController extends Controller
             ->where('number', '>', 0)
             ->where('tour_id', $validated['tour_id'])
             ->first();
-    
+
         if ($coupon) {
             session(['code' => $coupon->code]);
         }
-    
+
         // Xử lý khách hàng
         if (auth()->check()) {
             $customerId = auth()->user()->id;
@@ -93,7 +124,7 @@ class BookingController extends Controller
                 $temporaryUserId = Str::uuid();
                 Session::put('temporary_user_id', $temporaryUserId);
             }
-    
+
             $customer = Customer::firstOrCreate(
                 ['temporary_user_id' => $temporaryUserId],
                 [
@@ -103,11 +134,11 @@ class BookingController extends Controller
                     'type' => 'anonymous',
                 ]
             );
-    
+
             $customerId = $customer->id;
             $userId = null;
         }
-    
+
         // Tạo bản ghi book_tour và sao chép lịch trình
         $bookTour = null;
         DB::transaction(function () use ($validated, $customerId, $userId, &$bookTour) {
@@ -130,26 +161,26 @@ class BookingController extends Controller
                 'status' => $validated['status'] ?? 0,
                 'sale' => $validated['sale'] ?? 0,
             ]);
-    
+
             // Sao chép lịch trình từ tour_locations sang customer_tour_locations
             $this->storeCustomerTourLocations($bookTour->id, $validated['tour_id']);
         });
-    
+
         // Kiểm tra và chuyển hướng
         if ($bookTour && $bookTour->id) {
             return redirect()->route('tour.confirm', ['id' => $bookTour->id]);
         }
-    
+
         return redirect()->back()->withErrors(['error' => 'Đặt tour không thành công. Vui lòng thử lại.']);
     }
-    
+
     /**
      * Sao chép lịch trình từ bảng tour_locations sang customer_tour_locations
      */
     private function storeCustomerTourLocations($bookingId, $tourId)
     {
         $tourLocations = DB::table('tour_locations')->where('tour_id', $tourId)->get();
-    
+
         foreach ($tourLocations as $location) {
             DB::table('customer_tour_locations')->insert([
                 'booking_id' => $bookingId,
@@ -163,7 +194,7 @@ class BookingController extends Controller
             ]);
         }
     }
-    
+
 
 
 
