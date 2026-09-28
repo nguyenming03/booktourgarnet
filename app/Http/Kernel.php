@@ -54,7 +54,7 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $middlewareAliases = [
-        
+
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
@@ -68,10 +68,11 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         // 'admin' => \App\Http\Middleware\AuthLoginMiddleware::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'api.admin' => \App\Http\Middleware\Api\EnsureUserIsAdmin::class,
         'permission' => \App\Http\Middleware\CheckPermission::class,
         'checkstatus' => \App\Http\Middleware\CheckUserStatus::class,
-        'check_spam' => \App\Http\Middleware\CheckSpam::class,
+        // 'check_spam' => \App\Http\Middleware\CheckSpam::class,
         'nocaptcha' => \App\Http\Middleware\VerifyNoCaptcha::class,
-        
+
     ];
 }
