@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\AccountController;
+use App\Http\Controllers\Api\V1\TourController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +54,20 @@ Route::prefix('v1')->name('v1.')->group(function () {
             Route::post('/logout-all', [AuthController::class, 'logoutAll'])->name('logout-all');
             Route::put('/change-password', [AuthController::class, 'changePassword'])->name('change-password');
         });
+    });
+
+    //tour
+    Route::get('/tours', [TourController::class, 'index'])->name('tours.index');
+    Route::get('/tours/featured', [TourController::class, 'featured'])->name('tours.featured');
+    Route::get('/tours/{id}/related', [TourController::class, 'related'])->whereNumber('id')->name('tours.related');
+    Route::get('/tours/{id}', [TourController::class, 'show'])->whereNumber('id')->name('tours.show');
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/manage/tours', [TourController::class, 'manageIndex'])->name('tours.manage.index');
+        Route::post('/tours', [TourController::class, 'store'])->name('tours.store');
+        Route::put('/tours/{id}', [TourController::class, 'update'])->whereNumber('id')->name('tours.update');
+        Route::patch('/tours/{id}', [TourController::class, 'update'])->whereNumber('id')->name('tours.patch');
+        Route::delete('/tours/{id}', [TourController::class, 'destroy'])->whereNumber('id')->name('tours.destroy');
     });
 
     Route::middleware('auth:sanctum')->group(function () {
