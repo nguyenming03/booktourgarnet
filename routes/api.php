@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\AccountController;
 use App\Http\Controllers\Api\V1\TourController;
 use App\Http\Controllers\Api\V1\BookingController;
 use App\Http\Controllers\Api\V1\PaymentController;
+use App\Http\Controllers\Api\V1\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +84,18 @@ Route::prefix('v1')->name('v1.')->group(function () {
         Route::put('/payments/{id}', [PaymentController::class, 'update'])->whereNumber('id')->name('payments.update');
         Route::patch('/payments/{id}', [PaymentController::class, 'update'])->whereNumber('id')->name('payments.patch');
         Route::delete('/payments/{id}', [PaymentController::class, 'destroy'])->whereNumber('id')->name('payments.destroy');
+    });
+
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/categories/id/{id}', [CategoryController::class, 'showById'])->whereNumber('id')->name('categories.show-by-id');
+    Route::get('/categories/{slug}', [CategoryController::class, 'show'])->name('categories.show');
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/manage/categories', [CategoryController::class, 'manageIndex'])->name('categories.manage.index');
+        Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+        Route::put('/categories/{id}', [CategoryController::class, 'update'])->whereNumber('id')->name('categories.update');
+        Route::patch('/categories/{id}', [CategoryController::class, 'update'])->whereNumber('id')->name('categories.patch');
+        Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->whereNumber('id')->name('categories.destroy');
     });
 
 
