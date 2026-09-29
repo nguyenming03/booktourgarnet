@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\V1\BookingController;
 use App\Http\Controllers\Api\V1\PaymentController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\LocationController;
+use App\Http\Controllers\Api\V1\CouponController;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,6 +111,18 @@ Route::prefix('v1')->name('v1.')->group(function () {
         Route::put('/locations/{id}', [LocationController::class, 'update'])->whereNumber('id')->name('locations.update');
         Route::patch('/locations/{id}', [LocationController::class, 'update'])->whereNumber('id')->name('locations.patch');
         Route::delete('/locations/{id}', [LocationController::class, 'destroy'])->whereNumber('id')->name('locations.destroy');
+    });
+
+    Route::get('/coupons', [CouponController::class, 'index'])->name('coupons.index');
+    Route::get('/coupons/{id}', [CouponController::class, 'show'])->whereNumber('id')->name('coupons.show');
+    Route::post('/coupons/validate', [CouponController::class, 'validateCoupon'])->name('coupons.validate');
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/manage/coupons', [CouponController::class, 'manageIndex'])->name('coupons.manage.index');
+        Route::post('/coupons', [CouponController::class, 'store'])->name('coupons.store');
+        Route::put('/coupons/{id}', [CouponController::class, 'update'])->whereNumber('id')->name('coupons.update');
+        Route::patch('/coupons/{id}', [CouponController::class, 'update'])->whereNumber('id')->name('coupons.patch');
+        Route::delete('/coupons/{id}', [CouponController::class, 'destroy'])->whereNumber('id')->name('coupons.destroy');
     });
 
     Route::middleware('auth:sanctum')->group(function () {
