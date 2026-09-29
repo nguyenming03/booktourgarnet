@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\AccountController;
 use App\Http\Controllers\Api\V1\TourController;
 use App\Http\Controllers\Api\V1\BookingController;
-
+use App\Http\Controllers\Api\V1\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,7 +59,7 @@ Route::prefix('v1')->name('v1.')->group(function () {
         Route::delete('/tours/{id}', [TourController::class, 'destroy'])->whereNumber('id')->name('tours.destroy');
     });
 
-     Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
+    Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
     Route::get('/bookings/{id}', [BookingController::class, 'show'])->whereNumber('id')->name('bookings.show');
     Route::post('/bookings/{id}/cancel', [BookingController::class, 'cancel'])->whereNumber('id')->name('bookings.cancel');
 
@@ -70,6 +70,21 @@ Route::prefix('v1')->name('v1.')->group(function () {
         Route::patch('/bookings/{id}', [BookingController::class, 'update'])->whereNumber('id')->name('bookings.patch');
         Route::delete('/bookings/{id}', [BookingController::class, 'destroy'])->whereNumber('id')->name('bookings.destroy');
     });
+
+    //thanh toán 
+    Route::post('/payments', [PaymentController::class, 'store'])->name('payments.store');
+    Route::get('/payments/{id}', [PaymentController::class, 'show'])->whereNumber('id')->name('payments.show');
+    Route::post('/payments/vnpay/create', [PaymentController::class, 'vnpayCreate'])->name('payments.vnpay.create');
+    Route::match(['get', 'post'], '/payments/vnpay/return', [PaymentController::class, 'vnpayReturn'])->name('payments.vnpay.return');
+    Route::match(['get', 'post'], '/payments/vnpay/cancel', [PaymentController::class, 'vnpayCancel'])->name('payments.vnpay.cancel');
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
+        Route::put('/payments/{id}', [PaymentController::class, 'update'])->whereNumber('id')->name('payments.update');
+        Route::patch('/payments/{id}', [PaymentController::class, 'update'])->whereNumber('id')->name('payments.patch');
+        Route::delete('/payments/{id}', [PaymentController::class, 'destroy'])->whereNumber('id')->name('payments.destroy');
+    });
+
 
     Route::middleware('auth:sanctum')->group(function () {
         // Tài khoản cá nhân
