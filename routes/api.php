@@ -11,6 +11,10 @@ use App\Http\Controllers\Api\V1\PaymentController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\LocationController;
 use App\Http\Controllers\Api\V1\CouponController;
+use App\Http\Controllers\Api\V1\ContactController;
+use App\Http\Controllers\Api\V1\AdvisoryController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -123,6 +127,23 @@ Route::prefix('v1')->name('v1.')->group(function () {
         Route::put('/coupons/{id}', [CouponController::class, 'update'])->whereNumber('id')->name('coupons.update');
         Route::patch('/coupons/{id}', [CouponController::class, 'update'])->whereNumber('id')->name('coupons.patch');
         Route::delete('/coupons/{id}', [CouponController::class, 'destroy'])->whereNumber('id')->name('coupons.destroy');
+    });
+
+    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+    Route::post('/advisory', [AdvisoryController::class, 'store'])->name('advisory.store');
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
+        Route::get('/contacts/{id}', [ContactController::class, 'show'])->whereNumber('id')->name('contacts.show');
+        Route::put('/contacts/{id}', [ContactController::class, 'update'])->whereNumber('id')->name('contacts.update');
+        Route::patch('/contacts/{id}', [ContactController::class, 'update'])->whereNumber('id')->name('contacts.patch');
+        Route::delete('/contacts/{id}', [ContactController::class, 'destroy'])->whereNumber('id')->name('contacts.destroy');
+
+        Route::get('/advisories', [AdvisoryController::class, 'index'])->name('advisories.index');
+        Route::get('/advisories/{id}', [AdvisoryController::class, 'show'])->whereNumber('id')->name('advisories.show');
+        Route::put('/advisories/{id}', [AdvisoryController::class, 'update'])->whereNumber('id')->name('advisories.update');
+        Route::patch('/advisories/{id}', [AdvisoryController::class, 'update'])->whereNumber('id')->name('advisories.patch');
+        Route::delete('/advisories/{id}', [AdvisoryController::class, 'destroy'])->whereNumber('id')->name('advisories.destroy');
     });
 
     Route::middleware('auth:sanctum')->group(function () {
