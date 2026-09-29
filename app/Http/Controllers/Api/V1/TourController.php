@@ -24,14 +24,14 @@ class TourController extends Controller
 
         if ($request->filled('category_slug')) {
             $categoryId = CategoryTour::where('slug', $request->category_slug)->value('id');
-            $query->when($categoryId, fn ($q) => $q->where('category_tour_id', $categoryId));
+            $query->when($categoryId, fn($q) => $q->where('category_tour_id', $categoryId));
         } elseif ($request->filled('category_id')) {
             $query->where('category_tour_id', $request->category_id);
         }
 
         if ($request->filled('location_slug')) {
             $locationId = Location::where('slug', $request->location_slug)->value('id');
-            $query->when($locationId, fn ($q) => $q->where('location_id', $locationId));
+            $query->when($locationId, fn($q) => $q->where('location_id', $locationId));
         } elseif ($request->filled('location_id')) {
             $query->where('location_id', $request->location_id);
         }
@@ -52,8 +52,7 @@ class TourController extends Controller
         };
 
         $perPage = min(max((int) $request->input('per_page', 12), 1), 50);
-        $tours = $query->paginate($perPage)->withQueryString();
-
+        $tours = $query->paginate($perPage)->appends($request->query());
         return $this->success(TourResource::collection($tours), 'Danh sách tour.');
     }
 
@@ -67,7 +66,7 @@ class TourController extends Controller
         $perPage = min(max((int) $request->input('per_page', 20), 1), 100);
 
         $tours = Tour::with(['location', 'category_tour', 'images'])
-            ->when($request->filled('q'), fn ($q) => $q->where('name', 'like', '%' . $request->q . '%'))
+            ->when($request->filled('q'), fn($q) => $q->where('name', 'like', '%' . $request->q . '%'))
             ->orderByDesc('id')
             ->paginate($perPage);
 
