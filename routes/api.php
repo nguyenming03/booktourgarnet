@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\TourController;
 use App\Http\Controllers\Api\V1\BookingController;
 use App\Http\Controllers\Api\V1\PaymentController;
 use App\Http\Controllers\Api\V1\CategoryController;
+use App\Http\Controllers\Api\V1\LocationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -98,6 +99,18 @@ Route::prefix('v1')->name('v1.')->group(function () {
         Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->whereNumber('id')->name('categories.destroy');
     });
 
+    //địa điểm
+    Route::get('/locations', [LocationController::class, 'index'])->name('locations.index');
+    Route::get('/locations/id/{id}', [LocationController::class, 'showById'])->whereNumber('id')->name('locations.show-by-id');
+    Route::get('/locations/{slug}', [LocationController::class, 'show'])->name('locations.show');
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/manage/locations', [LocationController::class, 'manageIndex'])->name('locations.manage.index');
+        Route::post('/locations', [LocationController::class, 'store'])->name('locations.store');
+        Route::put('/locations/{id}', [LocationController::class, 'update'])->whereNumber('id')->name('locations.update');
+        Route::patch('/locations/{id}', [LocationController::class, 'update'])->whereNumber('id')->name('locations.patch');
+        Route::delete('/locations/{id}', [LocationController::class, 'destroy'])->whereNumber('id')->name('locations.destroy');
+    });
 
     Route::middleware('auth:sanctum')->group(function () {
         // Tài khoản cá nhân
