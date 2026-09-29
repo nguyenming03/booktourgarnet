@@ -6,31 +6,20 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\AccountController;
 use App\Http\Controllers\Api\V1\TourController;
+use App\Http\Controllers\Api\V1\BookingController;
 
 
 /*
 |--------------------------------------------------------------------------
 | API Routes - Website đặt tour (v1)
 |--------------------------------------------------------------------------
-| Được RouteServiceProvider tự động gắn tiền tố "/api" và middleware group "api"
-| (throttle:api mặc định 60 request/phút). Toàn bộ route bên dưới có thêm
-| tiền tố "v1" -> ví dụ: GET /api/v1/tours.
-|
 | Xác thực: Laravel Sanctum, kiểu Bearer token
 | (header Authorization: Bearer <token>).
-|
-| Khách vãng lai (đặt tour/thanh toán mà không cần tài khoản): gửi kèm header
-| "X-Temporary-User-Id: <uuid-do-client-tự-sinh-và-lưu-lại>" để hệ thống gộp
-| đơn hàng khi khách đăng ký tài khoản sau này.
-|
+| Khách vãng lai (đặt tour): yêu cầu khách hàng phải đăng nhập mới được đặt tour
 | Phân quyền:
 |   - Không middleware        : công khai, ai cũng gọi được
 |   - auth:sanctum             : cần đăng nhập (bất kỳ tài khoản nào)
 |   - auth:sanctum + api.admin : chỉ quản trị viên/nhân viên (role_id 1 hoặc 3)
-|
-| Ghi chú upload file: các route PUT có nhận file (image/images[]) nên được gọi
-| bằng POST kèm field "_method=PUT" (form method spoofing của Laravel), vì
-| PHP không parse được multipart/form-data trên request PUT/PATCH thật sự.
 */
 
 Route::prefix('v1')->name('v1.')->group(function () {
@@ -68,6 +57,18 @@ Route::prefix('v1')->name('v1.')->group(function () {
         Route::put('/tours/{id}', [TourController::class, 'update'])->whereNumber('id')->name('tours.update');
         Route::patch('/tours/{id}', [TourController::class, 'update'])->whereNumber('id')->name('tours.patch');
         Route::delete('/tours/{id}', [TourController::class, 'destroy'])->whereNumber('id')->name('tours.destroy');
+    });
+
+     Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
+    Route::get('/bookings/{id}', [BookingController::class, 'show'])->whereNumber('id')->name('bookings.show');
+    Route::post('/bookings/{id}/cancel', [BookingController::class, 'cancel'])->whereNumber('id')->name('bookings.cancel');
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
+        Route::get('/my-bookings', [BookingController::class, 'myBookings'])->name('bookings.mine');
+        Route::put('/bookings/{id}', [BookingController::class, 'update'])->whereNumber('id')->name('bookings.update');
+        Route::patch('/bookings/{id}', [BookingController::class, 'update'])->whereNumber('id')->name('bookings.patch');
+        Route::delete('/bookings/{id}', [BookingController::class, 'destroy'])->whereNumber('id')->name('bookings.destroy');
     });
 
     Route::middleware('auth:sanctum')->group(function () {
