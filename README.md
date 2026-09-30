@@ -1,8 +1,13 @@
 # Booking Garnet Travel
 ![alt text](image.png)
-Garnet Travel là một ứng dụng web được phát triển bằng PHP/Laravel, hỗ trợ người dùng đặt tour du lịch trực tuyến vaf theo dõi booking, quản lý thông tin khách hàng, tour, người dùng, danh mục, địa điểm, các nghiệp vụ liên quan và các giao dịch một cách dễ dàng và tiện lợi.
+Garnet Travel là một ứng dụng web được phát triển bằng PHP/Laravel, hỗ trợ người dùng đặt tour du lịch trực tuyến và theo dõi booking, quản lý thông tin khách hàng, tour, người dùng, danh mục, địa điểm, các nghiệp vụ liên quan và các giao dịch một cách dễ dàng và tiện lợi.
 
-## 🎯 Trọng tâm: PHP/Laravel • RESTful API • MySQL • Laravel Sanctum • Authentication & Authorization • Postman
+## 🎯 Trọng tâm:
+ • PHP/Laravel
+ • RESTful API 
+ • MySQL 
+ • Laravel Sanctum 
+ • Authentication & Authorization • Postman
 
 ## 📌 Mục lục
 
@@ -69,10 +74,7 @@ CRUD tour
 
 **🧾 Đặt Tour**
 - Luồng nghiệp vụ:
-- Khách hàng → Chọn tour → Chọn số lượng khách
-- → Validate → Kiểm tra khả dụng → Tạo booking
-- → Xử lý payment → Cập nhật trạng thái → Gửi email
-
+- Khách hàng → Chọn tour → Chọn số lượng khách → Validate → Kiểm tra khả dụng → Tạo booking → Xử lý payment → Cập nhật trạng thái → Gửi email
 - Backend xử lý:
 - Số lượng người lớn/trẻ em
 - Kiểm tra khả dụng của tour
