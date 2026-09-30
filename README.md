@@ -14,15 +14,11 @@ Garnet Travel là một ứng dụng web được phát triển bằng PHP/Larav
 - Tổng quan
 - Tính năng chính
 - Công nghệ sử dụng
-- Kiến trúc Backend
 - Luồng nghiệp vụ
 - RESTful API
 - Xác thực và phân quyền
-- Các nhóm API
 - Validation và xử lý lỗi
 - Cơ sở dữ liệu
-- Email và Queue
-- Kiểm thử API
 - Cấu trúc thư mục
 - Cài đặt
 - Git Workflow
@@ -91,6 +87,107 @@ CRUD tour
 - **Cơ sở dữ liệu**: MySQL
 - **Server**: Laragon (hoặc môi trường PHP tương tự)
 - **Khác**: Composer, NPM, Mailtrap (hoặc SMTP), Git/Github, Laragon, Postman, SMTP/Mail service
+
+## 🔄 Luồng nghiệp vụ
+
+**Luồng đặt Tour**
+
+GET /api/v1/tours
+        ↓
+GET /api/v1/tours/{id}
+        ↓
+Đăng nhập / xác thực
+        ↓
+POST /api/v1/bookings
+        ↓
+Validate thông tin
+        ↓
+Kiểm tra số lượng khách
+        ↓
+Tạo booking
+        ↓
+Payment
+        ↓
+Cập nhật trạng thái
+
+**Luồng Authentication**
+
+POST /api/v1/auth/login
+        ↓
+Kiểm tra email/password
+        ↓
+Tạo Bearer Token
+        ↓
+GET /api/v1/me
+        ↓
+Truy cập API được bảo vệ
+
+## 🌐 RESTful API
+
+API được tổ chức theo phiên bản:
+/api/v1
+Việc versioning giúp API dễ bảo trì và mở rộng trong tương lai.
+
+**🔑 Authentication**
+Đăng nhập
+
+POST /api/v1/auth/login
+
+{
+    "email": "user@example.com",
+    "password": "password"
+}
+
+Thông tin người dùng hiện tạ
+GET /api/v1/me
+Authorization: Bearer {access_token}
+Đăng xuất
+POST /api/v1/auth/logout
+Quên mật khẩu
+POST /api/v1/auth/forgot-password
+Đổi mật khẩu
+POST /api/v1/auth/change-password
+
+## 🔐 Xác thực và phân quyền
+
+Project sử dụng Laravel Sanctum.
+Authorization: Bearer {access_token}
+Các API liên quan đến tài khoản và đặt tour yêu cầu đăng nhập.
+Hệ thống sử dụng middleware/permission để kiểm soát quyền truy cập các chức năng quản trị.
+
+## ✅ Validation và xử lý lỗi
+
+Sử dụng Laravel Form Request:
+class StoreTourRequest extends FormRequest
+{
+    public function rules(): array
+    {
+        return [
+            'name' => 'required|string|max:255',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+        ];
+    }
+}
+
+Các HTTP status được xử lý:
+400 Bad Request
+401 Unauthorized
+403 Forbidden
+404 Not Found
+422 Unprocessable Entity
+500 Internal Server Error
+
+Ví dụ:
+{
+    "success": false,
+    "message": "The given data was invalid.",
+    "errors": {
+        "name": [
+            "The name has already been taken."
+        ]
+    }
+}
 
 ## 📦 Cài đặt
 
