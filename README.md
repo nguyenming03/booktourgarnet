@@ -1,22 +1,94 @@
 # Booking Garnet Travel
 ![alt text](image.png)
-Garnet Travel là một ứng dụng web được phát triển bằng Laravel, hỗ trợ người dùng đặt tour du lịch trực tuyến, quản lý thông tin khách hàng, tour, và các giao dịch một cách dễ dàng và tiện lợi.
+Garnet Travel là một ứng dụng web được phát triển bằng PHP/Laravel, hỗ trợ người dùng đặt tour du lịch trực tuyến vaf theo dõi booking, quản lý thông tin khách hàng, tour, người dùng, danh mục, địa điểm, các nghiệp vụ liên quan và các giao dịch một cách dễ dàng và tiện lợi.
+
+## 🎯 Trọng tâm: PHP/Laravel • RESTful API • MySQL • Laravel Sanctum • Authentication & Authorization • Postman
+
+## 📌 Mục lục
+
+- Tổng quan
+- Tính năng chính
+- Công nghệ sử dụng
+- Kiến trúc Backend
+- Luồng nghiệp vụ
+- RESTful API
+- Xác thực và phân quyền
+- Các nhóm API
+- Validation và xử lý lỗi
+- Cơ sở dữ liệu
+- Email và Queue
+- Kiểm thử API
+- Cấu trúc thư mục
+- Cài đặt
+- Git Workflow
+- Kinh nghiệm áp dụng
+- Hướng phát triển
+
+## 🌟 Tổng quan
+
+- BookTour Garnet gồm:
+
+**👤 Khách hàng**
+- Đăng ký/đăng nhập
+- Xem, tìm kiếm và lọc tour
+- Xem chi tiết tour, lịch trình và giá
+- Đặt tour trực tuyến
+- Theo dõi lịch sử booking
+- Quản lý tài khoản
+- Đánh giá và bình luận
+- Sử dụng mã giảm giá
+- Nhận email xác nhận booking
+
+**🛠️ Quản trị viên**
+CRUD tour
+- Quản lý danh mục và địa điểm
+- Quản lý khách hàng
+- Quản lý booking
+- Quản lý hướng dẫn viên
+- Quản lý coupon
+- Quản lý review/comment
+- Quản lý quyền truy cập
+- Theo dõi thông tin booking
+- Quản lý đánh giá
+- Quản lý phân quyền
+
+**🧑‍💼 Hướng dẫn viên**
+- Xem tour được phân công
+- Cập nhật thông tin/trạng thái tour được giao
 
 ## 🎯 Tính năng chính
 
-- Quản lý danh sách tour du lịch (CRUD).
-- Đặt tour trực tuyến cho khách hàng.
-- Quản lý thông tin khách hàng và giao dịch.
-- Tìm kiếm và lọc tour theo địa điểm, ngày khởi hành, giá, v.v.
-- Gửi email xác nhận khi đặt tour thành công.
+**🏝️ Quản lý Tour**
+- CRUD tour
+- Quản lý danh mục, địa điểm và lịch trình
+- Quản lý giá tour
+- Quản lý số lượng khách
+- Theo dõi số lượng khách đã đăng ký
+- Upload hình ảnh
+- Tìm kiếm, lọc và phân trang
+
+**🧾 Đặt Tour**
+- Luồng nghiệp vụ:
+- Khách hàng → Chọn tour → Chọn số lượng khách
+- → Validate → Kiểm tra khả dụng → Tạo booking
+- → Xử lý payment → Cập nhật trạng thái → Gửi email
+
+- Backend xử lý:
+- Số lượng người lớn/trẻ em
+- Kiểm tra khả dụng của tour
+- Validation dữ liệu
+- Theo dõi số khách đã đăng ký
+- Lịch sử booking
+- Hủy/cập nhật trạng thái booking
+- Liên kết booking với payment
 
 ## 🚀 Công nghệ sử dụng
 
-- **Backend**: Laravel 10.x
-- **Frontend**: Blade Template + HTML/CSS/JS 
+- **Backend**: PHP 8.2+ ,Laravel 10.x, RESTful API, Eloquent ORM, Form Request Validation, API Resource, Middleware, Queue/Job
+- **Frontend**: Blade Template + HTML/CSS/JS + jQuery + Bootstrap
 - **Cơ sở dữ liệu**: MySQL
 - **Server**: Laragon (hoặc môi trường PHP tương tự)
-- **Khác**: Composer, NPM, Mailtrap (hoặc SMTP)
+- **Khác**: Composer, NPM, Mailtrap (hoặc SMTP), Git/Github, Laragon, Postman, SMTP/Mail service
 
 ## 📦 Cài đặt
 
